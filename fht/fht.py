@@ -1,5 +1,5 @@
 """Implements the fast hadamard transform"""
-all = ["fht1", "fht2"]
+all = ["fht", "fht1", "fht2", "fht3"]
 import numpy as np
 import _C_fht
 
