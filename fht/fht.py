@@ -1,4 +1,4 @@
-"""Implements the fast hadamard transform"""
+"""Implements the fast Hadamard transform"""
 all = ["fht", "fht1", "fht2", "fht3"]
 import numpy as np
 import _C_fht
@@ -13,6 +13,11 @@ def fht(arr, **kargs):
     See also
     --------
     fht1, fht2, fht3: specialized function depending of the dimension of arr
+
+    Exemple
+    -------
+    >>> fht(np.asarray([2, 0, 0, 0]))
+    array([ 1.,  1.,  1.,  1.])
     """
     if arr.ndim == 1:
         return fht1(arr)
@@ -126,5 +131,7 @@ def fht3(arr, axes=(0, 1, 2)):
 
 def is_power_of_two(input_integer):
     """Test if an integer is a power of two"""
+    if input_integer == 1:
+        return False
     log_int = np.log2(input_integer)
     return (int(log_int) == log_int)
