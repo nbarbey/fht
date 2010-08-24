@@ -16,5 +16,6 @@ setup(name='fht',
                              include_dirs=[join(get_include(), 'numpy')],
                              extra_compile_args=['-fopenmp'],
                              extra_link_args=['-fopenmp'],),
-                   ]
+                   ],
+      data_files=['tests']
       )
