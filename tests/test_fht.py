@@ -33,6 +33,26 @@ class FhtTestCase:
         b = [1, -1, -1, 1]
         self.do(a, b)
 
+    def test_2d_4_1(self):
+        a = [[2, 0], [0, 0]]
+        b = [[1, 1], [1, 1]]
+        self.do(a, b)
+
+    def test_2d_4_2(self):
+        a = [[0, 2], [0, 0]]
+        b = [[1, -1], [1, -1]]
+        self.do(a, b)
+
+    def test_2d_4_3(self):
+        a = [[0, 0], [2, 0]]
+        b = [[1, 1], [-1, -1]]
+        self.do(a, b)
+
+    def test_2d_4_4(self):
+        a = [[0, 0], [0, 2]]
+        b = [[1, -1], [-1, 1]]
+        self.do(a, b)
+
 class TestFht(FhtTestCase):
     def do(self, a, b):
         a = np.asarray(a)
