@@ -103,7 +103,7 @@ def fht2(arr, axes=(0, 1), dtype=None):
     # power of two is mandatory for hadamard transform
     if not is_power_of_two(arr.shape[axes]):
         raise ValueError('array shape along axes must be a power of two')
-    iarr = iarr.swapaxes(1, axes)
+    iarr = arr.swapaxes(1, axes)
     # dtype
     if dtype is None:
         dtype = iarr.dtype
