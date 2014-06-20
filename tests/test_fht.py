@@ -75,5 +75,8 @@ def test_not_power_of_two():
     for i in [1, 3, 5, 6, 7, 9, 11, 127, 100000]:
         yield check_power_of_two, i
 
+def test_is_power_of_two():
+    assert_equal(fht.is_power_of_two(8L), True)
+
 if __name__ == "__main__":
     run_module_suite()
