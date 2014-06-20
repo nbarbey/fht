@@ -178,5 +178,4 @@ def is_power_of_two(input_integer):
     """Test if an integer is a power of two"""
     if input_integer == 1:
         return False
-    log_int = np.log2(input_integer)
-    return (int(log_int) == log_int)
+    return input_integer != 0 and ((input_integer & (input_integer - 1)) == 0)
