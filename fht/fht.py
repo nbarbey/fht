@@ -1,5 +1,5 @@
 """Implements the fast Hadamard transform"""
-__all__ = ["fht", "fht1", "fht2", "fht3"]
+__all__ = ["fht", "fht1", "fht2", "fht3", "is_power_of_two"]
 import numpy as np
 import _C_fht_int, _C_fht_long, _C_fht_float, _C_fht_double
 
