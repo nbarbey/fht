@@ -26,7 +26,7 @@ for t in types:
 
 sys.path.extend('config_fc --fcompiler=gnu95 --f90flags=-fopenmp --f90exec=/usr/bin/gfortran '.split())
 setup(name='fht',
-      version='1.0',
+      version='1.0.1',
       description='Fast Hadamard Transform',
       author='Nicolas Barbey',
       author_email='nicolas.a.barbey@gmail.com',
