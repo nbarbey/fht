@@ -1,4 +1,6 @@
-from fht import *
+from __future__ import absolute_import
+
+from fht.fht import *
 
 def test(level=1, verbosity=1):
     from numpy.testing import Tester

@@ -15,6 +15,14 @@
 
 #define CTYPE %(ctype)s
 
+#if PY_MAJOR_VERSION >= 3
+struct module_state {
+  PyObject *error;
+};
+
+#define GETSTATE(m) ((struct module_state*)PyModule_GetState(m))
+#endif
+
 #define DIND1(a, i) *((CTYPE *) PyArray_GETPTR1(a, i))
 #define DIND2(a, i, j) *((CTYPE *) PyArray_GETPTR2(a, i, j))
 
@@ -27,12 +35,6 @@ static PyMethodDef _py_hadamardMethods[] = {
   {"fht2_%(ctype)s", fht2_%(ctype)s, METH_VARARGS},
   {NULL, NULL}     /* Sentinel - marks the end of this structure */
 };
-
-void init_C_fht_%(ctype)s()  {
-  (void) Py_InitModule("_C_fht_%(ctype)s", _py_hadamardMethods);
-  import_array();  // Must be present for NumPy.  Called first after above line.
-  Py_Initialize();
-}
 
 static PyObject *fht1_%(ctype)s(PyObject *self, PyObject *args)
 {
@@ -100,3 +102,45 @@ static PyObject *fht2_%(ctype)s(PyObject *self, PyObject *args) {
   }
   return Py_BuildValue("d", 1.);
 }
+
+#if PY_MAJOR_VERSION >= 3
+
+static int _py_hadamard_traverse(PyObject *m, visitproc visit, void *arg) {
+  Py_VISIT(GETSTATE(m)->error);
+  return 0;
+}
+
+static int _py_hadamard_clear(PyObject *m) {
+  Py_CLEAR(GETSTATE(m)->error);
+  return 0;
+}
+
+static struct PyModuleDef moduledef = {
+  PyModuleDef_HEAD_INIT,
+  "_py_hadamard",
+  NULL,
+  sizeof(struct module_state),
+  _py_hadamardMethods,
+  NULL,
+  _py_hadamard_traverse,
+  _py_hadamard_clear,
+  NULL
+};
+
+PyMODINIT_FUNC
+PyInit__C_fht_%(ctype)s(void)
+{
+  PyObject *m = PyModule_Create(&moduledef);
+  import_array();  // Must be present for NumPy.  Called first after above line.
+  return m;
+}
+
+#else
+
+void init_C_fht_%(ctype)s()  {
+    (void) Py_InitModule("_C_fht_%(ctype)s", _py_hadamardMethods);
+    import_array();  // Must be present for NumPy.  Called first after above line.
+    Py_Initialize();
+}
+
+#endif
