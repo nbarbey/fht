@@ -1,0 +1,9 @@
+include AUTHOR
+include fht/C_fht.template.c
+include fht/_fht.py
+include fht/__init__.py
+include LICENCE_FR
+include LICENSE
+include README.rst
+include setup.py
+include tests/test_fht.py
