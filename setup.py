@@ -1,4 +1,8 @@
 #!/usr/bin/env python
+import setuptools
+
+setuptools.setup(setup_requires=['numpy'])
+
 from numpy.distutils.core import Extension, setup
 from numpy import get_include
 from os.path import join
