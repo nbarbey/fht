@@ -1,4 +1,8 @@
 #!/usr/bin/env python
+import setuptools
+
+setuptools.setup(setup_requires=['numpy'])
+
 from numpy.distutils.core import Extension, setup
 from numpy import get_include
 from os.path import join
@@ -24,7 +28,6 @@ for t in types:
 
 # distutils
 
-sys.path.extend('config_fc --fcompiler=gnu95 --f90flags=-fopenmp --f90exec=/usr/bin/gfortran '.split())
 setup(name='fht',
       version='1.0.1',
       description='Fast Hadamard Transform',
@@ -34,9 +37,7 @@ setup(name='fht',
       packages=['fht'],
       ext_modules=[Extension('fht._C_fht_%(ctype)s' % {"ctype":t},
                              [join('fht', 'C_fht_%(ctype)s.c') % {"ctype":t}],
-                             include_dirs=[join(get_include(), 'numpy')],
-                             extra_compile_args=['-fopenmp'],
-                             extra_link_args=['-fopenmp'],)
+                             include_dirs=[join(get_include(), 'numpy')], )
                    for t in types],
       data_files=[('tests', ['test_fht'])]
       )
