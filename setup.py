@@ -1,9 +1,6 @@
 #!/usr/bin/env python
-import setuptools
 
-setuptools.setup(setup_requires=['numpy'])
-
-from numpy.distutils.core import Extension, setup
+from distutils.core import Extension, setup
 from numpy import get_include
 from os.path import join
 import os
@@ -39,5 +36,4 @@ setup(name='fht',
                              [join('fht', 'C_fht_%(ctype)s.c') % {"ctype":t}],
                              include_dirs=[join(get_include(), 'numpy')], )
                    for t in types],
-      data_files=[('tests', ['test_fht'])]
       )
